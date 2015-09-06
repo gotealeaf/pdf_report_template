@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Overdue Notice</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/notice.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <p>An Internet Library</p>
+          <h1>Overdue Notice</h1>
+          <div class="alert alert-danger">
+            Please be advised that you currently have {{overdue_books_count}}.
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">{{ user.username }}</div>
+            <div class="panel-body">
+              {{ user.first_name }} {{ user.last_name }}<br>
+              {{ user.address }}<br>
+              {{ user.city }}, {{ user.state }}, {{ user.zipcode }}<br>
+              {{ user.phone }}<br>
+              {{ user.email }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Book</th>
+                <th>Due</th>
+                <th>Days Late</th>
+                <th>Daily Fine</th>
+                <th>Total Fine</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{# books}}
+                <tr>
+                  <td>{{ title }} ({{ author }})</td>
+                  <td>{{ due_date }}</td>
+                  <td>{{ days_late }}</td>
+                  <td>{{ formatted_daily_fine }}</td>
+                  <td>{{ formatted_total_fine }}</td>
+                </tr>
+              {{/ books}}
+              <tr class="active">
+                <td colspan="4">{{ overdue_books_count }}</td>
+                <td>{{ formatted_total_fine }}</td>
+              <tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
